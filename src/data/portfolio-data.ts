@@ -12,7 +12,7 @@ export const portfolioData = {
     github: "https://github.com/salbifaza",
     photo: "/profile-photo.jpg",
   },
-  cvFile: "/CV-Salbi-Faza-Rinaldi.pdf",
+  cvFile: "https://raw.githubusercontent.com/salbifaza/portofolio/main/public/CV_Salbi_Faza_Rinaldi.pdf",
   skills: [
     { name: "Python", icon: icons.python },
     { name: "SQL", icon: icons.sql },
