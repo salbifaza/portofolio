@@ -4,47 +4,47 @@
 
 @layer base {
   :root {
-    --background: 210 40% 98%;
-    --foreground: 240 10% 3.9%;
+    --background: 210 20% 98%; /* gray-50 */
+    --foreground: 220 9% 29%; /* gray-700 */
     --card: 0 0% 100%;
-    --card-foreground: 240 10% 3.9%;
+    --card-foreground: 220 9% 29%;
     --popover: 0 0% 100%;
-    --popover-foreground: 240 10% 3.9%;
-    --primary: 275 100% 25.1%;
+    --popover-foreground: 220 9% 29%;
+    --primary: 172 70% 40%; /* teal-600 */
     --primary-foreground: 0 0% 100%;
     --secondary: 220 13% 91%;
     --secondary-foreground: 240 5.9% 10%;
     --muted: 210 40% 96.1%;
     --muted-foreground: 240 5.9% 10%;
-    --accent: 180 100% 25.1%;
+    --accent: 172 80% 50%; /* teal-500 */
     --accent-foreground: 0 0% 100%;
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 98%;
-    --border: 0 0% 89.8%;
-    --input: 0 0% 89.8%;
-    --ring: 180 100% 25.1%;
+    --border: 210 20% 88%; /* gray-200 */
+    --input: 210 20% 88%;
+    --ring: 172 70% 40%;
   }
 
   .dark {
-    --background: 222 47% 11%;
-    --foreground: 210 40% 98%;
-    --card: 224 39% 16%;
-    --card-foreground: 210 40% 98%;
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
-    --primary: 275 80% 60%;
-    --primary-foreground: 210 40% 98%;
-    --secondary: 217.2 32.6% 17.5%;
+    --background: 220 14% 10%; /* gray-900 */
+    --foreground: 220 14% 71%; /* gray-300 */
+    --card: 220 13% 18%; /* gray-800 */
+    --card-foreground: 220 14% 71%;
+    --popover: 220 14% 10%;
+    --popover-foreground: 220 14% 71%;
+    --primary: 172 51% 50%; /* teal-500 */
+    --primary-foreground: 0 0% 100%;
+    --secondary: 220 14% 20%;
     --secondary-foreground: 210 40% 98%;
-    --muted: 224 39% 16%;
+    --muted: 220 13% 18%;
     --muted-foreground: 215 20.2% 65.1%;
-    --accent: 180 80% 60%;
+    --accent: 172 63% 57%; /* teal-400 */
     --accent-foreground: 222.2 47.4% 11.2%;
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 210 40% 98%;
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 180 80% 60%;
+    --border: 220 13% 28%; /* gray-700 */
+    --input: 220 13% 28%;
+    --ring: 172 51% 50%;
   }
 }
 
@@ -54,6 +54,7 @@
   }
   body {
     @apply bg-background text-foreground;
+    font-family: sans-serif;
   }
   html {
     @apply scroll-smooth;

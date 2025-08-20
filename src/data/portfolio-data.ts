@@ -1,14 +1,4 @@
-import {
-  PythonIcon,
-  SqlIcon,
-  AwsIcon,
-  GcpIcon,
-  AirflowIcon,
-  DockerIcon,
-  KubernetesIcon,
-  SparkIcon,
-  DbtIcon,
-} from '@/components/icons';
+import { icons } from '@/components/icons';
 
 export const portfolioData = {
   name: "Salbi Faza Rinaldi",
@@ -23,15 +13,15 @@ export const portfolioData = {
   },
   cvFile: "/CV_Salbi_Faza_Rinaldi.pdf",
   skills: [
-    { name: "Python", icon: PythonIcon },
-    { name: "SQL", icon: SqlIcon },
-    { name: "AWS", icon: AwsIcon },
-    { name: "GCP", icon: GcpIcon },
-    { name: "Apache Airflow", icon: AirflowIcon },
-    { name: "Docker", icon: DockerIcon },
-    { name: "Kubernetes", icon: KubernetesIcon },
-    { name: "Apache Spark", icon: SparkIcon },
-    { name: "dbt", icon: DbtIcon },
+    { name: "Python", icon: icons.python },
+    { name: "SQL", icon: icons.sql },
+    { name: "AWS", icon: icons.aws },
+    { name: "GCP", icon: icons.gcp },
+    { name: "Apache Airflow", icon: icons.airflow },
+    { name: "Docker", icon: icons.docker },
+    { name: "Kubernetes", icon: icons.kubernetes },
+    { name: "Apache Spark", icon: icons.spark },
+    { name: "dbt", icon: icons.dbt },
   ],
   experience: [
     {

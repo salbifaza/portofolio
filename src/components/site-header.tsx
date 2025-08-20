@@ -1,10 +1,10 @@
 "use client";
 
 import { useState } from 'react';
-import { Menu, X } from 'lucide-react';
 import { portfolioData } from '@/data/portfolio-data';
 import { cn } from '@/lib/utils';
 import { ThemeToggle } from './theme-toggle';
+import { icons } from './icons';
 
 export function SiteHeader() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -24,9 +24,9 @@ export function SiteHeader() {
   };
 
   return (
-    <header className="bg-background/80 backdrop-blur-md sticky top-0 z-50 border-b">
+    <header className="bg-white/80 dark:bg-gray-900/80 backdrop-blur-md sticky top-0 z-50 shadow-sm">
       <div className="container mx-auto px-6 md:px-12 py-4 flex justify-between items-center">
-        <a href="#home" onClick={(e) => handleLinkClick(e, '#home')} className="font-headline text-2xl font-bold text-primary">
+        <a href="#home" onClick={(e) => handleLinkClick(e, '#home')} className="text-2xl font-bold text-gray-800 dark:text-white">
           {portfolioData.name}
         </a>
         <div className="flex items-center">
@@ -36,7 +36,7 @@ export function SiteHeader() {
                 key={link.href} 
                 href={link.href} 
                 onClick={(e) => handleLinkClick(e, link.href)} 
-                className="text-foreground/80 hover:text-primary transition-colors duration-300 font-medium"
+                className="text-gray-600 dark:text-gray-300 hover:text-teal-600 dark:hover:text-teal-400 transition-colors duration-300"
               >
                 {link.label}
               </a>
@@ -44,29 +44,23 @@ export function SiteHeader() {
           </nav>
           <ThemeToggle />
           <button className="md:hidden z-50 ml-4" onClick={() => setIsMenuOpen(!isMenuOpen)} aria-label="Toggle menu">
-            {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+            {isMenuOpen ? icons.close : icons.menu}
           </button>
         </div>
       </div>
       
       {/* Mobile Menu */}
-      <div className={cn(
-        "md:hidden fixed inset-0 bg-background/95 backdrop-blur-xl z-40 transition-transform duration-300 ease-in-out",
-        isMenuOpen ? "translate-x-0" : "translate-x-full"
-      )}>
-        <nav className="flex flex-col items-center justify-center h-full space-y-8">
-          {navLinks.map(link => (
-            <a 
-              key={link.href} 
-              href={link.href} 
-              onClick={(e) => handleLinkClick(e, link.href)} 
-              className="text-2xl text-foreground/80 hover:text-primary transition-colors duration-300 font-bold"
-            >
-              {link.label}
-            </a>
-          ))}
-        </nav>
-      </div>
+       {isMenuOpen && (
+          <div className="md:hidden bg-white dark:bg-gray-800 absolute top-full left-0 w-full shadow-md">
+            <nav className="flex flex-col items-center space-y-4 py-4">
+              {navLinks.map(link => (
+                <a key={link.href} href={link.href} onClick={(e) => handleLinkClick(e, link.href)} className="text-gray-600 dark:text-gray-300 hover:text-teal-600 dark:hover:text-teal-400 transition-colors duration-300">
+                  {link.label}
+                </a>
+              ))}
+            </nav>
+          </div>
+        )}
     </header>
   );
 }

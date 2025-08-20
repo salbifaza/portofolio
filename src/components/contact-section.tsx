@@ -1,10 +1,8 @@
-
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
-import { Github, Linkedin, Mail } from "lucide-react";
 import { portfolioData } from "@/data/portfolio-data";
 import { Button } from "@/components/ui/button";
 import {
@@ -17,7 +15,9 @@ import {
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Section } from "@/components/section";
+import { SectionTitle } from "@/components/section-title";
 import { useToast } from "@/hooks/use-toast";
+import { icons } from "@/components/icons";
 
 const formSchema = z.object({
   name: z.string().min(2, "Name must be at least 2 characters."),
@@ -47,11 +47,9 @@ export function ContactSection() {
 
   return (
     <Section id="contact" className="bg-gray-800 dark:bg-black">
-      <h2 className="font-headline text-3xl font-bold text-center text-white md:text-4xl mb-4">
-        Get In Touch
-      </h2>
+      <SectionTitle>Get In Touch</SectionTitle>
       <div className="max-w-2xl mx-auto text-center">
-        <p className="text-lg mb-8 text-gray-300 dark:text-gray-400">
+        <p className="text-lg text-gray-300 dark:text-gray-400 mb-8">
           I'm always open to discussing new projects, creative ideas, or
           opportunities to be part of an ambitious team. Feel free to reach out.
         </p>
@@ -61,7 +59,7 @@ export function ContactSection() {
             className="text-gray-300 hover:text-teal-400 transition-colors duration-300"
             aria-label="Email"
           >
-            <Mail className="h-7 w-7" />
+            {icons.mail}
           </a>
           <a
             href={portfolioData.contact.linkedin}
@@ -70,7 +68,7 @@ export function ContactSection() {
             className="text-gray-300 hover:text-teal-400 transition-colors duration-300"
             aria-label="LinkedIn"
           >
-            <Linkedin className="h-7 w-7" />
+            {icons.linkedin}
           </a>
           <a
             href={portfolioData.contact.github}
@@ -79,7 +77,7 @@ export function ContactSection() {
             className="text-gray-300 hover:text-teal-400 transition-colors duration-300"
             aria-label="GitHub"
           >
-            <Github className="h-7 w-7" />
+            {icons.github}
           </a>
         </div>
         <Form {...form}>
@@ -87,7 +85,7 @@ export function ContactSection() {
             onSubmit={form.handleSubmit(onSubmit)}
             className="space-y-6 text-left"
           >
-            <div className="grid md:grid-cols-2 gap-6">
+            <div className="grid md:grid-cols-2 gap-6 mb-6">
               <FormField
                 control={form.control}
                 name="name"
@@ -113,6 +111,7 @@ export function ContactSection() {
                       <Input
                         placeholder="Your Email"
                         {...field}
+                        type="email"
                         className="w-full bg-gray-700 dark:bg-gray-800 text-white p-3 rounded-lg border border-gray-600 dark:border-gray-700 focus:outline-none focus:ring-2 focus:ring-teal-500"
                       />
                     </FormControl>
@@ -131,7 +130,7 @@ export function ContactSection() {
                       placeholder="Your Message"
                       rows={5}
                       {...field}
-                      className="w-full bg-gray-700 dark:bg-gray-800 text-white p-3 rounded-lg border border-gray-600 dark:border-gray-700 focus:outline-none focus:ring-2 focus:ring-teal-500"
+                      className="w-full bg-gray-700 dark:bg-gray-800 text-white p-3 rounded-lg border border-gray-600 dark:border-gray-700 focus:outline-none focus:ring-2 focus:ring-teal-500 mb-6"
                     />
                   </FormControl>
                   <FormMessage />
