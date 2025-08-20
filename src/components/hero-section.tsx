@@ -6,7 +6,7 @@ import { Section } from "@/components/section";
 
 export function HeroSection() {
   return (
-    <Section id="home" className="pt-24 md:pt-32 lg:pt-40">
+    <Section id="home" className="pt-24 md:pt-32 lg:pt-40 bg-card dark:bg-background">
       <div className="container mx-auto flex flex-col-reverse md:flex-row items-center gap-12">
         <div className="md:w-3/5 text-center md:text-left">
           <h1 className="font-headline text-4xl md:text-6xl font-bold leading-tight mb-4">

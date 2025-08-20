@@ -47,19 +47,19 @@ export function ContactSection() {
   }
 
   return (
-    <Section id="contact" className="bg-[#1C2331] text-gray-300">
-      <h2 className="font-headline text-3xl font-bold text-center md:text-4xl mb-4 text-white">
+    <Section id="contact" className="bg-muted dark:bg-black">
+      <h2 className="font-headline text-3xl font-bold text-center md:text-4xl mb-4 text-foreground dark:text-gray-300">
         Get In Touch
       </h2>
       <div className="max-w-2xl mx-auto text-center">
-        <p className="text-lg mb-8">
+        <p className="text-lg mb-8 text-foreground dark:text-gray-400">
           I'm always open to discussing new projects, creative ideas, or
           opportunities to be part of an ambitious team. Feel free to reach out.
         </p>
         <div className="flex justify-center items-center space-x-6 mb-12">
           <a
             href={`mailto:${portfolioData.contact.email}`}
-            className="text-gray-300 hover:text-primary transition-colors duration-300"
+            className="text-foreground dark:text-gray-300 hover:text-primary transition-colors duration-300"
             aria-label="Email"
           >
             <Mail className="h-7 w-7" />
@@ -68,7 +68,7 @@ export function ContactSection() {
             href={portfolioData.contact.linkedin}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-gray-300 hover:text-primary transition-colors duration-300"
+            className="text-foreground dark:text-gray-300 hover:text-primary transition-colors duration-300"
             aria-label="LinkedIn"
           >
             <Linkedin className="h-7 w-7" />
@@ -77,7 +77,7 @@ export function ContactSection() {
             href={portfolioData.contact.github}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-gray-300 hover:text-primary transition-colors duration-300"
+            className="text-foreground dark:text-gray-300 hover:text-primary transition-colors duration-300"
             aria-label="GitHub"
           >
             <Github className="h-7 w-7" />
@@ -94,12 +94,12 @@ export function ContactSection() {
                 name="name"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel className="text-gray-200">Name</FormLabel>
+                    <FormLabel className="text-foreground dark:text-gray-200">Name</FormLabel>
                     <FormControl>
                       <Input
                         placeholder="Your Name"
                         {...field}
-                        className="bg-gray-800 border-gray-700 text-white"
+                        className="bg-secondary dark:bg-gray-700 border-border dark:border-gray-600 text-foreground dark:text-white"
                       />
                     </FormControl>
                     <FormMessage />
@@ -111,12 +111,12 @@ export function ContactSection() {
                 name="email"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel className="text-gray-200">Email</FormLabel>
+                    <FormLabel className="text-foreground dark:text-gray-200">Email</FormLabel>
                     <FormControl>
                       <Input
                         placeholder="Your Email"
                         {...field}
-                        className="bg-gray-800 border-gray-700 text-white"
+                        className="bg-secondary dark:bg-gray-700 border-border dark:border-gray-600 text-foreground dark:text-white"
                       />
                     </FormControl>
                     <FormMessage />
@@ -129,13 +129,13 @@ export function ContactSection() {
               name="message"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="text-gray-200">Message</FormLabel>
+                  <FormLabel className="text-foreground dark:text-gray-200">Message</FormLabel>
                   <FormControl>
                     <Textarea
                       placeholder="Your Message"
                       rows={5}
                       {...field}
-                      className="bg-gray-800 border-gray-700 text-white"
+                      className="bg-secondary dark:bg-gray-700 border-border dark:border-gray-600 text-foreground dark:text-white"
                     />
                   </FormControl>
                   <FormMessage />

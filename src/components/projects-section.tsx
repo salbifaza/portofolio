@@ -10,7 +10,7 @@ import { Badge } from "@/components/ui/badge";
 import { Section } from "@/components/section";
 
 const ProjectCard = ({ title, description, stack }: { title: string, description: string, stack: string[] }) => (
-  <Card className="transform transition-transform duration-300 hover:-translate-y-2 flex flex-col">
+  <Card className="transform transition-transform duration-300 hover:-translate-y-2 flex flex-col bg-card dark:bg-muted">
     <CardHeader>
       <CardTitle className="font-headline text-xl">{title}</CardTitle>
     </CardHeader>
@@ -29,7 +29,7 @@ const ProjectCard = ({ title, description, stack }: { title: string, description
 
 export function ProjectsSection() {
   return (
-    <Section id="projects" className="bg-muted/50 dark:bg-card">
+    <Section id="projects" className="bg-card dark:bg-muted">
       <h2 className="font-headline text-3xl font-bold text-center md:text-4xl mb-12">
         Projects & Case Studies
       </h2>

@@ -11,7 +11,7 @@ const SkillBadge = ({ name, icon: Icon }: { name: string, icon: React.ElementTyp
 
 export function SkillsSection() {
   return (
-    <Section id="skills" className="bg-muted/50 dark:bg-card">
+    <Section id="skills" className="bg-card dark:bg-muted">
       <h2 className="font-headline text-3xl font-bold text-center md:text-4xl mb-12">
         Skills & Tools
       </h2>
