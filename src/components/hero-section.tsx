@@ -28,12 +28,11 @@ export function HeroSection() {
         <div className="md:w-1/2 flex justify-center mt-12 md:mt-0">
             <div className="w-64 h-64 md:w-80 md:h-80 bg-gray-200 dark:bg-gray-800 rounded-full flex items-center justify-center shadow-lg">
                 <Image
-                  src={portfolioData.contact.photo}
+                  src="/profile-photo.jpg"
                   alt={portfolioData.name}
                   width={320}
                   height={320}
                   className="rounded-full object-cover w-full h-full shadow-lg"
-                  data-ai-hint="profile photo"
                   priority
                 />
             </div>

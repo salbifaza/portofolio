@@ -10,9 +10,9 @@ export const portfolioData = {
     email: "salbifaza@gmail.com",
     linkedin: "https://linkedin.com/in/salbifaza",
     github: "https://github.com/salbifaza",
-    photo: "https://avatars.githubusercontent.com/u/43633636?v=4",
+    photo: "/profile-photo.jpg",
   },
-  cvFile: "/CV_Salbi_Faza_Rinaldi.pdf",
+  cvFile: "/CV-Salbi-Faza-Rinaldi.pdf",
   skills: [
     { name: "Python", icon: icons.python },
     { name: "SQL", icon: icons.sql },
@@ -82,7 +82,7 @@ export const portfolioData = {
     },
     {
       title: "Scalable Data Orchestration with Airflow & DAG Factory",
-      description: "Set up a robust, on-premise Apache Airflow environment and developed standardized DAG templates to streamline and scale ETL processes.",
+      description: "Set up a robust, on-premise Apache Airflow environment and developed a standardized DAG template to streamline and scale ETL processes.",
       stack: ["Apache Airflow", "DAG Factory", "GitLab CI", "Docker"],
     },
   ],
