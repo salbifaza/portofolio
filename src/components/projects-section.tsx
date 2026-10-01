@@ -2,10 +2,17 @@ import { portfolioData } from "@/data/portfolio-data";
 import { Section } from "@/components/section";
 import { SectionTitle } from "@/components/section-title";
 
-const ProjectCard = ({ title, description, stack }: { title: string, description: string, stack: string[] }) => (
-  <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden transform hover:-translate-y-2 transition-transform duration-300">
+type Project = { title: string, description: string, stack: string[], link?: string, featured?: boolean };
+
+const ProjectCard = ({ title, description, stack, link, featured }: Project) => (
+  <div className={`bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden transform hover:-translate-y-2 transition-transform duration-300${featured ? " md:col-span-2 ring-2 ring-teal-500" : ""}`}>
     <div className="p-6">
-      <h3 className="text-xl font-bold text-gray-800 dark:text-white mb-2">{title}</h3>
+      {featured && (
+        <span className="inline-block mb-3 px-3 py-1 bg-teal-600 text-white text-xs font-semibold rounded-full">Featured</span>
+      )}
+      <h3 className="text-xl font-bold text-gray-800 dark:text-white mb-2">
+        {link ? <a href={link} target="_blank" rel="noopener noreferrer" className="hover:text-teal-600 dark:hover:text-teal-400">{title}</a> : title}
+      </h3>
       <p className="text-gray-600 dark:text-gray-300 mb-4">{description}</p>
       <div className="flex flex-wrap gap-2">
         {stack.map((tech, index) => (
@@ -14,6 +21,11 @@ const ProjectCard = ({ title, description, stack }: { title: string, description
           </span>
         ))}
       </div>
+      {link && (
+        <a href={link} target="_blank" rel="noopener noreferrer" className="inline-block mt-4 text-sm font-semibold text-teal-600 dark:text-teal-400 hover:underline">
+          View on GitHub →
+        </a>
+      )}
     </div>
   </div>
 );

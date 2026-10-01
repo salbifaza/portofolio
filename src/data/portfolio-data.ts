@@ -66,6 +66,13 @@ export const portfolioData = {
   ],
   projects: [
     {
+      title: "Streaming Lakehouse: Postgres CDC → Apache Fluss → Apache Iceberg",
+      description: "End-to-end streaming lakehouse where Apache Fluss replaces Kafka + Debezium as the CDC tier. Flink CDC streams Postgres into a bronze/silver/gold medallion built in Flink SQL, tiered into Iceberg tables (Apache Polaris REST catalog) on SeaweedFS and queried with Trino. Verified end to end with one command, with documented fixes for the five issues hit along the way.",
+      stack: ["Apache Fluss", "Apache Flink", "Flink CDC", "Apache Iceberg", "Apache Polaris", "Trino", "SeaweedFS", "PostgreSQL", "Docker Compose"],
+      link: "https://github.com/salbifaza/lakehouse-iceberg-stream",
+      featured: true,
+    },
+    {
       title: "Self-Service Analytics Platform with Apache Superset",
       description: "Implemented a self-hosted analytics platform to enhance data governance and reduce costs, migrating from cloud-based BI tools.",
       stack: ["Apache Superset", "Google BigQuery", "ClickHouse"],
