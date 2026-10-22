@@ -2,61 +2,369 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer base {
-  :root {
-    --background: 210 20% 98%; /* gray-50 */
-    --foreground: 220 9% 29%; /* gray-700 */
-    --card: 0 0% 100%;
-    --card-foreground: 220 9% 29%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 220 9% 29%;
-    --primary: 172 70% 40%; /* teal-600 */
-    --primary-foreground: 0 0% 100%;
-    --secondary: 220 13% 91%;
-    --secondary-foreground: 240 5.9% 10%;
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 240 5.9% 10%;
-    --accent: 172 80% 50%; /* teal-500 */
-    --accent-foreground: 0 0% 100%;
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 210 20% 88%; /* gray-200 */
-    --input: 210 20% 88%;
-    --ring: 172 70% 40%;
-  }
+/* Tokens are RGB channels so Tailwind can apply alpha (border-text/12). Palette: Design.md §2.
+   The light set is derived from the dark one and checked against WCAG AA. */
+:root,
+:root[data-theme='dark'] {
+  --bg: 17 16 16;
+  --surface: 26 25 24;
+  --text: 237 234 228;
+  --muted: 185 180 172;
+  --subtle: 168 163 155;
+  --label: 143 138 130;
+  --faint: 134 129 122;
+  --accent: 127 168 255;
+  --on-accent: 17 16 16;
+  color-scheme: dark;
+}
 
-  .dark {
-    --background: 220 14% 10%; /* gray-900 */
-    --foreground: 220 14% 71%; /* gray-300 */
-    --card: 220 13% 18%; /* gray-800 */
-    --card-foreground: 220 14% 71%;
-    --popover: 220 14% 10%;
-    --popover-foreground: 220 14% 71%;
-    --primary: 172 51% 50%; /* teal-500 */
-    --primary-foreground: 0 0% 100%;
-    --secondary: 220 14% 20%;
-    --secondary-foreground: 210 40% 98%;
-    --muted: 220 13% 18%;
-    --muted-foreground: 215 20.2% 65.1%;
-    --accent: 172 63% 57%; /* teal-400 */
-    --accent-foreground: 222.2 47.4% 11.2%;
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
-    --border: 220 13% 28%; /* gray-700 */
-    --input: 220 13% 28%;
-    --ring: 172 51% 50%;
-  }
+:root[data-theme='light'] {
+  --bg: 244 241 234;
+  --surface: 235 231 222;
+  --text: 26 24 22;
+  --muted: 74 69 63;
+  --subtle: 87 82 75;
+  --label: 101 96 88;
+  --faint: 106 101 93;
+  --accent: 42 86 192;
+  --on-accent: 244 241 234;
+  color-scheme: light;
+}
+
+:root {
+  --gutter: clamp(20px, 4vw, 56px);
+  --page-top: clamp(120px, 18vh, 180px);
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.76, 0, 0.24, 1);
+  --fvs-display: 'wdth' 70, 'wght' 800;
+  --fvs-row: 'wdth' 88, 'wght' 700;
+  --fvs-italic: 'wdth' 115, 'wght' 250;
 }
 
 @layer base {
-  * {
-    @apply border-border;
+  html {
+    background: rgb(var(--bg));
+  }
+  html[data-motion='on'] {
+    scroll-behavior: smooth;
   }
   body {
-    @apply bg-background text-foreground;
-    font-family: sans-serif;
+    @apply bg-bg font-sans text-text antialiased;
+    overflow-x: clip;
   }
-  html {
-    @apply scroll-smooth;
+  ::selection {
+    background: rgb(var(--accent));
+    color: rgb(var(--on-accent));
+  }
+  :focus-visible {
+    outline: 2px solid rgb(var(--accent));
+    outline-offset: 4px;
+  }
+  /* Sections that sit under the fixed header */
+  [id] {
+    scroll-margin-top: 80px;
+  }
+}
+
+@layer components {
+  .gutter {
+    padding-inline: var(--gutter);
+  }
+  .rule {
+    @apply border-t border-text/[0.12];
+  }
+  .eyebrow {
+    @apply font-mono text-xs uppercase tracking-[0.06em] text-label;
+  }
+  .eyebrow-sm {
+    @apply font-mono text-[11px] uppercase tracking-[0.06em] text-faint;
+  }
+  .display {
+    @apply uppercase;
+    font-size: clamp(64px, 14vw, 240px);
+    line-height: 0.86;
+    font-variation-settings: var(--fvs-display);
+  }
+  .display-md {
+    @apply uppercase;
+    font-size: clamp(44px, 8vw, 128px);
+    line-height: 0.9;
+    font-variation-settings: var(--fvs-display);
+  }
+  .italic-wide {
+    @apply font-light italic normal-case;
+    font-variation-settings: var(--fvs-italic);
+  }
+  .statement {
+    font-size: clamp(24px, 2.6vw, 38px);
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+    text-wrap: pretty;
+  }
+  .body-copy {
+    @apply text-muted;
+    font-size: 19px;
+    line-height: 1.55;
+    text-wrap: pretty;
+  }
+  .outline-text {
+    color: transparent;
+    -webkit-text-stroke: 1px rgb(var(--text) / 0.45);
+    transition: color 0.4s;
+  }
+  .outline-text:hover {
+    color: rgb(var(--text));
+  }
+  .chip {
+    @apply inline-flex items-center rounded-full border border-text/20 px-3.5 py-2 text-sm text-text;
+  }
+  .btn {
+    @apply inline-flex min-h-[44px] items-center justify-center gap-2 rounded-full px-4 py-2.5 text-[15px] font-medium transition-colors duration-150;
+  }
+  .btn-primary {
+    @apply bg-accent text-on-accent hover:bg-text;
+  }
+  .btn-outline {
+    @apply border border-text/25 bg-transparent font-mono text-xs uppercase tracking-[0.06em] text-text hover:bg-accent hover:text-on-accent;
+  }
+}
+
+/* Theme / motion label swaps: driven by the root attributes so no hydration state is needed. */
+html[data-theme='light'] .show-when-dark,
+html:not([data-theme='light']) .show-when-light,
+html[data-motion='off'] .show-when-motion-on,
+html:not([data-motion='off']) .show-when-motion-off {
+  display: none;
+}
+
+/* Marquee: one duplicated track, animated only while motion is on.
+   With motion off (or no script) it falls back to a single wrapped, static group. */
+.marquee-track {
+  display: flex;
+  width: max-content;
+  will-change: transform;
+}
+.marquee-group {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+}
+html:not([data-motion='on']) .marquee-track {
+  width: auto;
+}
+html:not([data-motion='on']) .marquee-group {
+  flex-wrap: wrap;
+  row-gap: 8px;
+}
+html:not([data-motion='on']) .marquee-group + .marquee-group {
+  display: none;
+}
+.marquee-reverse .marquee-track {
+  animation-direction: reverse !important;
+}
+.logo-mask {
+  display: inline-block;
+  background: currentColor;
+  -webkit-mask: var(--logo) center / contain no-repeat;
+  mask: var(--logo) center / contain no-repeat;
+}
+.cover-type {
+  container-type: inline-size;
+}
+.cover-type > span {
+  font-size: clamp(28px, 13cqi, 96px);
+}
+@keyframes marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+html[data-motion='on'] .marquee-track {
+  animation: marquee var(--marquee-duration, 40s) linear infinite;
+}
+html[data-motion='on'] .marquee:hover .marquee-track {
+  animation-play-state: paused;
+}
+
+/* Reveals: hidden only when script has run and motion is on, so no-JS stays readable. */
+html[data-motion='on'] .reveal:not(.is-in) {
+  opacity: 0;
+  transform: translateY(28px);
+}
+html[data-motion='on'] .reveal {
+  transition: opacity 0.8s var(--ease-out), transform 0.8s var(--ease-out);
+}
+
+/* Service pipeline: hidden until hover (always visible where hover is unavailable); a signal then runs source to sink. */
+.pipeline {
+  display: flex;
+  align-items: flex-start;
+  margin-top: 2rem;
+  max-width: 22rem;
+}
+.pipe-node {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+.pipe-box {
+  width: 10px;
+  height: 10px;
+  border: 1px solid rgb(var(--text) / 0.35);
+}
+.pipe-label {
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-size: 10px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: rgb(var(--text) / 0.5);
+  white-space: nowrap;
+}
+.pipe-link {
+  position: relative;
+  flex: 1 1 0;
+  min-width: 0.75rem;
+  height: 1px;
+  margin-top: 5px;
+  background: rgb(var(--text) / 0.18);
+}
+.pipe-link::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgb(var(--accent));
+  transform: scaleX(0);
+  transform-origin: left;
+}
+html[data-motion='on'] .pipe-box {
+  transition: background-color 0.25s ease, border-color 0.25s ease;
+}
+html[data-motion='on'] .pipe-label {
+  transition: color 0.25s ease;
+}
+html[data-motion='on'] .pipe-link::after {
+  transition: transform 0.3s linear;
+}
+@media (hover: hover) {
+  .pipeline {
+    opacity: 0;
+  }
+  html[data-motion='on'] .pipeline {
+    transition: opacity 0.3s ease;
+  }
+  .service-card:hover .pipeline {
+    opacity: 1;
+  }
+  .service-card:hover .pipe-box {
+    background: rgb(var(--accent));
+    border-color: rgb(var(--accent));
+  }
+  .service-card:hover .pipe-label {
+    color: rgb(var(--text));
+  }
+  .service-card:hover .pipe-link::after {
+    transform: scaleX(1);
+  }
+  html[data-motion='on'] .service-card:hover .pipe-box,
+  html[data-motion='on'] .service-card:hover .pipe-label {
+    transition-delay: calc(var(--i) * 0.3s);
+  }
+  html[data-motion='on'] .service-card:hover .pipe-link::after {
+    transition-delay: calc(var(--i) * 0.3s);
+  }
+}
+
+/* Glitch / CRT title: scan-lines always, RGB-split bursts and a power-on flicker when motion is on. */
+.glitch {
+  position: relative;
+  display: inline-block;
+}
+.glitch::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: repeating-linear-gradient(0deg, rgb(var(--bg) / 0.18) 0 1px, transparent 1px 4px);
+}
+.glitch-layer {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  pointer-events: none;
+  mix-blend-mode: screen;
+}
+.glitch-a {
+  color: #ff2a6d;
+}
+.glitch-b {
+  color: #05d9e8;
+}
+html[data-theme='light'] .glitch-layer {
+  mix-blend-mode: multiply;
+}
+@keyframes glitch-a {
+  0%, 70%, 100% { opacity: 0; transform: translate(0); clip-path: inset(0 0 100% 0); }
+  71% { opacity: 1; clip-path: inset(5% 0 70% 0); transform: translate(-0.08em, 0); }
+  74% { clip-path: inset(52% 0 14% 0); transform: translate(0.1em, 0.01em); }
+  77% { clip-path: inset(22% 0 50% 0); transform: translate(-0.12em, 0); }
+  80% { clip-path: inset(68% 0 2% 0); transform: translate(0.09em, -0.01em); }
+  83% { clip-path: inset(0 0 60% 0); transform: translate(-0.06em, 0.01em); }
+  86% { clip-path: inset(38% 0 32% 0); transform: translate(0.13em, 0); }
+  89% { clip-path: inset(80% 0 0 0); transform: translate(-0.1em, 0); }
+  92% { clip-path: inset(10% 0 55% 0); transform: translate(0.07em, 0); }
+  94% { opacity: 0; }
+}
+@keyframes glitch-b {
+  0%, 71%, 100% { opacity: 0; transform: translate(0); clip-path: inset(0 0 100% 0); }
+  72% { opacity: 1; clip-path: inset(44% 0 28% 0); transform: translate(0.1em, 0); }
+  75% { clip-path: inset(10% 0 66% 0); transform: translate(-0.11em, 0.01em); }
+  78% { clip-path: inset(62% 0 10% 0); transform: translate(0.08em, 0); }
+  81% { clip-path: inset(30% 0 40% 0); transform: translate(-0.13em, -0.01em); }
+  84% { clip-path: inset(78% 0 0 0); transform: translate(0.09em, 0); }
+  87% { clip-path: inset(0 0 74% 0); transform: translate(-0.07em, 0.01em); }
+  90% { clip-path: inset(50% 0 20% 0); transform: translate(0.12em, 0); }
+  93% { clip-path: inset(20% 0 52% 0); transform: translate(-0.08em, 0); }
+  95% { opacity: 0; }
+}
+@keyframes glitch-jitter {
+  0%, 70%, 96%, 100% { transform: none; filter: none; }
+  72% { transform: translate(0.03em, 0) skewX(-9deg); filter: brightness(1.5) contrast(1.4); }
+  76% { transform: translate(-0.04em, 0) skewX(6deg); }
+  80% { transform: translate(0.02em, 0.01em) skewX(-4deg); filter: brightness(2) saturate(2); }
+  84% { transform: translate(-0.03em, 0) skewX(8deg); }
+  88% { transform: translate(0.04em, -0.01em) skewX(-6deg); filter: brightness(1.6); }
+  92% { transform: translate(-0.02em, 0) skewX(3deg); }
+}
+@keyframes glitch-power-on {
+  0% { opacity: 0; transform: scaleY(0.04); filter: brightness(3); }
+  25% { opacity: 1; transform: scaleY(1.04) translateX(-8px); filter: brightness(1.8); }
+  45% { opacity: 0.35; transform: translateX(6px); }
+  65% { opacity: 1; transform: translateX(-3px); }
+  100% { opacity: 1; transform: none; filter: none; }
+}
+html[data-motion='on'] .glitch-main {
+  animation: glitch-power-on 0.7s steps(8, end) both, glitch-jitter 4s steps(24, end) calc(1.2s + var(--glitch-delay)) infinite;
+}
+html[data-motion='on'] .glitch-a {
+  animation: glitch-a 4s steps(24, end) calc(1.2s + var(--glitch-delay)) infinite;
+}
+html[data-motion='on'] .glitch-b {
+  animation: glitch-b 4s steps(24, end) calc(1.2s + var(--glitch-delay)) infinite;
+}
+@media (hover: hover) {
+  html[data-motion='on'] .glitch:hover .glitch-main,
+  html[data-motion='on'] .glitch:hover .glitch-a,
+  html[data-motion='on'] .glitch:hover .glitch-b {
+    animation-duration: 1.1s;
+  }
+  html[data-motion='on'] .glitch:hover .glitch-main {
+    animation-duration: 0.7s, 1.1s;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html[data-motion='on'] {
+    scroll-behavior: auto;
   }
 }
