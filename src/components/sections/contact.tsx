@@ -17,9 +17,10 @@ export function Contact() {
       <div className="mt-12 flex flex-wrap gap-4">
         <PillButton href={`mailto:${profile.email}`}>Email Me</PillButton>
         {profile.bookingUrl && <PillButton href={profile.bookingUrl} variant="outline">Book a Call</PillButton>}
-        <PillButton href={assetPath(profile.cv)} variant="outline" download>
+        {/* Plain anchor: assetPath already applies the base path, next/link would add it twice. */}
+        <a href={assetPath(profile.cv)} download className="btn btn-outline">
           Download CV
-        </PillButton>
+        </a>
       </div>
 
       <div className="rule mt-24 pt-8">
