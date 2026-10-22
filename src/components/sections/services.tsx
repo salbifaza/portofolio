@@ -20,7 +20,7 @@ export function Services() {
               <span className="font-mono text-xs tracking-[0.06em] text-accent">{String(i + 1).padStart(2, '0')}</span>
               <h3
                 className="mt-6 text-3xl uppercase"
-                style={{fontVariationSettings: 'var(--fvs-row, "wdth" 88, "wght" 700)'}}
+                style={{fontVariationSettings: 'var(--fvs-row)'}}
               >
                 {s.title}
               </h3>

@@ -73,7 +73,7 @@ export function TimelinePanel({entry}: {entry: TimelineEntry}) {
   return (
     <article id={`timeline-${entry.id}`} data-panel className={panelClass} aria-label="Certifications">
       <header>
-        <Eyebrow>{entry.yearLabel === 'Certs' ? '2025' : entry.yearLabel}</Eyebrow>
+        <Eyebrow>{entry.startYear}</Eyebrow>
         <div className="mt-4">
           <Title>Certifications</Title>
         </div>

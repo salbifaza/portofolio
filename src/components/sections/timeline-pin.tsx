@@ -25,7 +25,6 @@ export function TimelinePin({years, children}: {years: YearItem[]; children: Rea
   const trackRef = useRef<HTMLDivElement>(null);
   const fillRef = useRef<HTMLSpanElement>(null);
   const markerRef = useRef<HTMLSpanElement>(null);
-  const barRef = useRef<HTMLDivElement>(null);
 
   const [pinned, setPinned] = useState(false);
   const [active, setActive] = useState(0);
@@ -110,9 +109,7 @@ export function TimelinePin({years, children}: {years: YearItem[]; children: Rea
       const p = progressFor(window.scrollY, sectionTop, overflow);
       track.style.transform = `translate3d(${trackOffset(p, overflow)}px,0,0)`;
       if (fillRef.current) fillRef.current.style.transform = `scaleX(${p})`;
-      if (markerRef.current && barRef.current) {
-        markerRef.current.style.left = `${markerPosition(p, 100)}%`;
-      }
+      if (markerRef.current) markerRef.current.style.left = `${markerPosition(p, 100)}%`;
       const idx = activePanelIndex(p, lefts, overflow);
       if (idx !== activeRef.current) {
         activeRef.current = idx;
@@ -148,9 +145,13 @@ export function TimelinePin({years, children}: {years: YearItem[]; children: Rea
     window.addEventListener('resize', onResize);
     const ro = new ResizeObserver(onResize);
     ro.observe(track);
-    document.fonts?.ready.then(onResize);
+    let cancelled = false;
+    document.fonts?.ready.then(() => {
+      if (!cancelled) onResize();
+    });
 
     return () => {
+      cancelled = true;
       window.removeEventListener('scroll', onScroll);
       window.removeEventListener('resize', onResize);
       ro.disconnect();
@@ -184,9 +185,8 @@ export function TimelinePin({years, children}: {years: YearItem[]; children: Rea
     <div ref={sectionRef} data-pinned={pinned} className="group relative">
       <div className="group-data-[pinned=true]:sticky group-data-[pinned=true]:top-0 group-data-[pinned=true]:flex group-data-[pinned=true]:h-screen group-data-[pinned=true]:flex-col group-data-[pinned=true]:overflow-clip group-data-[pinned=true]:pt-16">
         <TimelineYearBar
-          ref={barRef}
           years={years}
-          active={active}
+          active={pinned ? active : -1}
           onJump={(i) => jump(i)}
           fillRef={fillRef}
           markerRef={markerRef}

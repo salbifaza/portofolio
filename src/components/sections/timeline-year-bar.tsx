@@ -1,5 +1,3 @@
-import {forwardRef} from 'react';
-
 export interface YearItem {
   id: string;
   label: string;
@@ -15,12 +13,9 @@ interface Props {
 }
 
 /** Year buttons with a progress line and position marker. The line and marker only show while pinned. */
-export const TimelineYearBar = forwardRef<HTMLDivElement, Props>(function TimelineYearBar(
-  {years, active, onJump, fillRef, markerRef},
-  ref,
-) {
+export function TimelineYearBar({years, active, onJump, fillRef, markerRef}: Props) {
   return (
-    <div ref={ref} className="gutter bg-bg pb-4 pt-2">
+    <div className="gutter bg-bg pb-4 pt-2">
       <ul className="flex flex-wrap justify-between gap-x-4">
         {years.map((y, i) => (
           <li key={y.id}>
@@ -48,4 +43,4 @@ export const TimelineYearBar = forwardRef<HTMLDivElement, Props>(function Timeli
       </div>
     </div>
   );
-});
+}

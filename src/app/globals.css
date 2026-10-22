@@ -37,6 +37,7 @@
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
   --ease-in-out: cubic-bezier(0.76, 0, 0.24, 1);
   --fvs-display: 'wdth' 70, 'wght' 800;
+  --fvs-row: 'wdth' 88, 'wght' 700;
   --fvs-italic: 'wdth' 115, 'wght' 250;
 }
 

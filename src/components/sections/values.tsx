@@ -23,7 +23,7 @@ export function Values() {
                   {String(i + 1).padStart(2, '0')}
                 </span>
                 <div>
-                  <h3 className="text-3xl" style={{fontVariationSettings: '"wdth" 88, "wght" 700'}}>
+                  <h3 className="text-3xl" style={{fontVariationSettings: 'var(--fvs-row)'}}>
                     {v.title}
                   </h3>
                   <p className="body-copy mt-3 max-w-[46ch]">{v.body}</p>

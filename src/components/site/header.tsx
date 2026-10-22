@@ -35,6 +35,7 @@ export function Header() {
       (entries) => {
         for (const entry of entries) {
           if (entry.isIntersecting) setActive(entry.target.id);
+          else setActive((prev) => (prev === entry.target.id ? null : prev));
         }
       },
       {rootMargin: '-45% 0px -50% 0px'},
@@ -98,7 +99,7 @@ export function Header() {
           className="gutter flex flex-col gap-1 border-t border-text/[0.12] bg-bg pb-6 pt-3 min-[901px]:hidden"
         >
           {[...NAV, {id: 'contact', label: 'Contact'}].map((n) => (
-            <Link key={n.id} href={`/#${n.id}`} className="inline-flex min-h-[44px] items-center text-2xl">
+            <Link key={n.id} href={`/#${n.id}`} className="inline-flex min-h-[44px] items-center text-2xl" onClick={() => setOpen(false)}>
               {n.label}
             </Link>
           ))}

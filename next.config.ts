@@ -32,4 +32,8 @@ const nextConfig: NextConfig = {
   },
 };
 
+// Derive the client-side base path from the final config, so a basePath injected by
+// actions/configure-pages is honoured by assetPath() as well as one set via the env var.
+nextConfig.env = {NEXT_PUBLIC_BASE_PATH: nextConfig.basePath ?? ''};
+
 export default nextConfig;
