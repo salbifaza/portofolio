@@ -1,6 +1,22 @@
 import type {Metadata} from 'next';
+import {Archivo, Geist_Mono} from 'next/font/google';
 import './globals.css';
-import { Toaster } from "@/components/ui/toaster";
+import {Header} from '@/components/site/header';
+import {initScript} from '@/lib/init-script';
+
+const archivo = Archivo({
+  subsets: ['latin'],
+  axes: ['wdth'],
+  variable: '--font-archivo',
+  display: 'swap',
+});
+
+const geistMono = Geist_Mono({
+  subsets: ['latin'],
+  weight: '400',
+  variable: '--font-geist-mono',
+  display: 'swap',
+});
 
 export const metadata: Metadata = {
   title: 'Salbi Faza Rinaldi | Senior Data Engineer',
@@ -13,12 +29,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en" className={`${archivo.variable} ${geistMono.variable}`} suppressHydrationWarning>
       <head>
+        <script dangerouslySetInnerHTML={{__html: initScript}} />
       </head>
-      <body className="bg-gray-50 dark:bg-gray-900 text-gray-700 dark:text-gray-300 transition-colors duration-300">
+      <body>
+        <Header />
         {children}
-        <Toaster />
       </body>
     </html>
   );

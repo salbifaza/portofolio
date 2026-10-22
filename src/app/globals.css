@@ -2,61 +2,169 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer base {
-  :root {
-    --background: 210 20% 98%; /* gray-50 */
-    --foreground: 220 9% 29%; /* gray-700 */
-    --card: 0 0% 100%;
-    --card-foreground: 220 9% 29%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 220 9% 29%;
-    --primary: 172 70% 40%; /* teal-600 */
-    --primary-foreground: 0 0% 100%;
-    --secondary: 220 13% 91%;
-    --secondary-foreground: 240 5.9% 10%;
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 240 5.9% 10%;
-    --accent: 172 80% 50%; /* teal-500 */
-    --accent-foreground: 0 0% 100%;
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 210 20% 88%; /* gray-200 */
-    --input: 210 20% 88%;
-    --ring: 172 70% 40%;
-  }
+/* Tokens are RGB channels so Tailwind can apply alpha (border-text/12). Palette: Design.md §2.
+   The light set is derived from the dark one and checked against WCAG AA. */
+:root,
+:root[data-theme='dark'] {
+  --bg: 17 16 16;
+  --surface: 26 25 24;
+  --text: 237 234 228;
+  --muted: 185 180 172;
+  --subtle: 168 163 155;
+  --label: 143 138 130;
+  --faint: 134 129 122;
+  --accent: 127 168 255;
+  --on-accent: 17 16 16;
+  color-scheme: dark;
+}
 
-  .dark {
-    --background: 220 14% 10%; /* gray-900 */
-    --foreground: 220 14% 71%; /* gray-300 */
-    --card: 220 13% 18%; /* gray-800 */
-    --card-foreground: 220 14% 71%;
-    --popover: 220 14% 10%;
-    --popover-foreground: 220 14% 71%;
-    --primary: 172 51% 50%; /* teal-500 */
-    --primary-foreground: 0 0% 100%;
-    --secondary: 220 14% 20%;
-    --secondary-foreground: 210 40% 98%;
-    --muted: 220 13% 18%;
-    --muted-foreground: 215 20.2% 65.1%;
-    --accent: 172 63% 57%; /* teal-400 */
-    --accent-foreground: 222.2 47.4% 11.2%;
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
-    --border: 220 13% 28%; /* gray-700 */
-    --input: 220 13% 28%;
-    --ring: 172 51% 50%;
-  }
+:root[data-theme='light'] {
+  --bg: 244 241 234;
+  --surface: 235 231 222;
+  --text: 26 24 22;
+  --muted: 74 69 63;
+  --subtle: 87 82 75;
+  --label: 101 96 88;
+  --faint: 106 101 93;
+  --accent: 42 86 192;
+  --on-accent: 244 241 234;
+  color-scheme: light;
+}
+
+:root {
+  --gutter: clamp(20px, 4vw, 56px);
+  --page-top: clamp(120px, 18vh, 180px);
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.76, 0, 0.24, 1);
+  --fvs-display: 'wdth' 70, 'wght' 800;
+  --fvs-italic: 'wdth' 115, 'wght' 250;
 }
 
 @layer base {
-  * {
-    @apply border-border;
+  html {
+    background: rgb(var(--bg));
+  }
+  html[data-motion='on'] {
+    scroll-behavior: smooth;
   }
   body {
-    @apply bg-background text-foreground;
-    font-family: sans-serif;
+    @apply bg-bg font-sans text-text antialiased;
+    overflow-x: clip;
   }
-  html {
-    @apply scroll-smooth;
+  ::selection {
+    background: rgb(var(--accent));
+    color: rgb(var(--on-accent));
+  }
+  :focus-visible {
+    outline: 2px solid rgb(var(--accent));
+    outline-offset: 4px;
+  }
+  /* Sections that sit under the fixed header */
+  [id] {
+    scroll-margin-top: 80px;
+  }
+}
+
+@layer components {
+  .gutter {
+    padding-inline: var(--gutter);
+  }
+  .rule {
+    @apply border-t border-text/[0.12];
+  }
+  .eyebrow {
+    @apply font-mono text-xs uppercase tracking-[0.06em] text-label;
+  }
+  .eyebrow-sm {
+    @apply font-mono text-[11px] uppercase tracking-[0.06em] text-faint;
+  }
+  .display {
+    @apply uppercase;
+    font-size: clamp(64px, 14vw, 240px);
+    line-height: 0.86;
+    font-variation-settings: var(--fvs-display);
+  }
+  .display-md {
+    @apply uppercase;
+    font-size: clamp(44px, 8vw, 128px);
+    line-height: 0.9;
+    font-variation-settings: var(--fvs-display);
+  }
+  .italic-wide {
+    @apply font-light italic normal-case;
+    font-variation-settings: var(--fvs-italic);
+  }
+  .statement {
+    font-size: clamp(24px, 2.6vw, 38px);
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+    text-wrap: pretty;
+  }
+  .body-copy {
+    @apply text-muted;
+    font-size: 19px;
+    line-height: 1.55;
+    text-wrap: pretty;
+  }
+  .outline-text {
+    color: transparent;
+    -webkit-text-stroke: 1px rgb(var(--text) / 0.45);
+    transition: color 0.4s;
+  }
+  .outline-text:hover {
+    color: rgb(var(--text));
+  }
+  .chip {
+    @apply inline-flex items-center rounded-full border border-text/20 px-3.5 py-2 text-sm text-text;
+  }
+  .btn {
+    @apply inline-flex min-h-[44px] items-center justify-center gap-2 rounded-full px-4 py-2.5 text-[15px] font-medium transition-colors duration-150;
+  }
+  .btn-primary {
+    @apply bg-accent text-on-accent hover:bg-text;
+  }
+  .btn-outline {
+    @apply border border-text/25 bg-transparent font-mono text-xs uppercase tracking-[0.06em] text-text hover:bg-accent hover:text-on-accent;
+  }
+}
+
+/* Theme / motion label swaps: driven by the root attributes so no hydration state is needed. */
+html[data-theme='light'] .show-when-dark,
+html:not([data-theme='light']) .show-when-light,
+html[data-motion='off'] .show-when-motion-on,
+html:not([data-motion='off']) .show-when-motion-off {
+  display: none;
+}
+
+/* Marquee: one duplicated track, animated only while motion is on. */
+.marquee-track {
+  display: flex;
+  width: max-content;
+  will-change: transform;
+}
+@keyframes marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+html[data-motion='on'] .marquee-track {
+  animation: marquee var(--marquee-duration, 40s) linear infinite;
+}
+html[data-motion='on'] .marquee:hover .marquee-track {
+  animation-play-state: paused;
+}
+
+/* Reveals: hidden only when script has run and motion is on, so no-JS stays readable. */
+html[data-motion='on'] .reveal:not(.is-in) {
+  opacity: 0;
+  transform: translateY(28px);
+}
+html[data-motion='on'] .reveal {
+  transition: opacity 0.8s var(--ease-out), transform 0.8s var(--ease-out);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html[data-motion='on'] {
+    scroll-behavior: auto;
   }
 }
