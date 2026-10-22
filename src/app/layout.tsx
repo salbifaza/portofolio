@@ -2,6 +2,7 @@ import type {Metadata} from 'next';
 import {Archivo, Geist_Mono} from 'next/font/google';
 import './globals.css';
 import {Header} from '@/components/site/header';
+import {PreferenceGuard} from '@/components/site/preference-guard';
 import {initScript} from '@/lib/init-script';
 
 const archivo = Archivo({
@@ -42,6 +43,7 @@ export default function RootLayout({
         <script dangerouslySetInnerHTML={{__html: initScript}} />
       </head>
       <body>
+        <PreferenceGuard />
         <Header />
         {children}
       </body>
