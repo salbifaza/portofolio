@@ -18,9 +18,17 @@ const geistMono = Geist_Mono({
   display: 'swap',
 });
 
+const description =
+  'Portfolio of Salbi Faza Rinaldi, a Senior Data Engineer building batch and streaming data platforms, lakehouses and pipelines.';
+
 export const metadata: Metadata = {
   title: 'Salbi Faza Rinaldi | Senior Data Engineer',
-  description: 'The portfolio of Salbi Faza Rinaldi, a Senior Data Engineer specializing in cloud & big data solutions.',
+  description,
+  openGraph: {
+    title: 'Salbi Faza Rinaldi | Senior Data Engineer',
+    description,
+    type: 'website',
+  },
 };
 
 export default function RootLayout({
