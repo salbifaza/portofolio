@@ -58,9 +58,8 @@ export function Header() {
     >
       <div className="gutter grid grid-cols-[1fr_auto] items-center py-3 min-[901px]:grid-cols-[1fr_auto_1fr]">
         <Link href="/" className="inline-flex items-center gap-2 text-lg" aria-label={`${profile.name}, home`}>
-          <span aria-hidden className="inline-block h-4 w-4 bg-accent" />
           <span className="uppercase" style={{fontVariationSettings: 'var(--fvs-display)'}}>Salbi</span>
-          <span className="italic-wide">Faza</span>
+          <span className="italic-wide">Rinaldi</span>
         </Link>
 
         <p className="eyebrow-sm max-[900px]:hidden">
