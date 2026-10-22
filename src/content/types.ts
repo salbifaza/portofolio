@@ -30,6 +30,8 @@ export interface Project {
 export interface Service {
   title: string;
   description: string;
+  /** Stages shown in the card's pipeline diagram, source first. */
+  flow: string[];
 }
 
 export interface Value {
@@ -82,6 +84,8 @@ export interface Profile {
   name: string;
   title: string;
   location: string;
+  /** Place and IANA time zone shown with a live clock in the navbar. */
+  base: { place: string; timeZone: string };
   email: string;
   linkedin: string;
   github: string;

@@ -4,8 +4,8 @@ import Link from 'next/link';
 import {usePathname} from 'next/navigation';
 import {useEffect, useState} from 'react';
 import {profile} from '@/content';
+import {LocalTime} from './local-time';
 import {ThemeToggle} from './theme-toggle';
-import {MotionToggle} from './motion-toggle';
 
 const NAV = [
   {id: 'about', label: 'About'},
@@ -64,7 +64,7 @@ export function Header() {
         </Link>
 
         <p className="eyebrow-sm max-[900px]:hidden">
-          {profile.title} <span className="opacity-50">/</span> {profile.location}
+          {profile.base.place} <span className="opacity-50">|</span> <LocalTime timeZone={profile.base.timeZone} />
         </p>
 
         <nav aria-label="Main" className="flex items-center justify-end gap-5 max-[900px]:hidden">
@@ -74,11 +74,10 @@ export function Header() {
               {n.label}
             </Link>
           ))}
-          <ThemeToggle className={controlClass} />
-          <MotionToggle className={controlClass} />
           <Link href="/#contact" className="btn btn-primary !min-h-0 !py-2.5">
             Contact
           </Link>
+          <ThemeToggle className={controlClass} />
         </nav>
 
         <button
@@ -105,7 +104,6 @@ export function Header() {
           ))}
           <div className="mt-3 flex gap-5">
             <ThemeToggle className={`${controlClass} min-h-[44px]`} />
-            <MotionToggle className={`${controlClass} min-h-[44px]`} />
           </div>
         </nav>
       )}

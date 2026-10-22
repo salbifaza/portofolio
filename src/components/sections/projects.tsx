@@ -1,6 +1,5 @@
-import Link from 'next/link';
 import {projects} from '@/content';
-import {Cover} from '@/components/case-study/cover';
+import {ProjectsSlider} from './projects-slider';
 import {Eyebrow} from '@/components/primitives/eyebrow';
 import {Reveal} from '@/components/primitives/reveal';
 
@@ -19,23 +18,7 @@ export function Projects() {
         <Eyebrow>({String(projects.length).padStart(2, '0')} projects)</Eyebrow>
       </Reveal>
 
-      <ul className="grid gap-x-8 gap-y-14 md:grid-cols-2 min-[1200px]:grid-cols-3">
-        {projects.map((p) => (
-          <li key={p.slug}>
-            <Reveal>
-              <Link href={`/work/${p.slug}`} className="group block">
-                <div className="overflow-hidden rounded-card transition-transform duration-500 group-hover:scale-[0.985]">
-                  <Cover project={p} />
-                </div>
-                <div className="mt-4 flex items-start justify-between gap-4">
-                  <h3 className="text-xl font-medium group-hover:text-accent">{p.name}</h3>
-                  <span className="chip shrink-0 !px-3 !py-1 !text-xs">{p.category}</span>
-                </div>
-              </Link>
-            </Reveal>
-          </li>
-        ))}
-      </ul>
+      <ProjectsSlider projects={projects} />
     </section>
   );
 }

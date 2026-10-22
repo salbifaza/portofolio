@@ -4,7 +4,7 @@ export const skills: string[] = [
   'Flink · Kafka · Fluss',
   'Iceberg · Trino',
   'ClickHouse · BigQuery',
-  'AWS & GCP',
+  'AWS, GCP & Azure',
   'Docker · Kubernetes · GitOps',
   'Data Quality',
 ];

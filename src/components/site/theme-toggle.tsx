@@ -1,5 +1,6 @@
 'use client';
 
+import {Moon, Sun} from 'lucide-react';
 import {THEME_KEY} from '@/lib/theme';
 
 export function ThemeToggle({className}: {className?: string}) {
@@ -15,9 +16,9 @@ export function ThemeToggle({className}: {className?: string}) {
   };
 
   return (
-    <button type="button" onClick={toggle} className={className} aria-label="Switch between dark and light theme">
-      <span className="show-when-dark">Light</span>
-      <span className="show-when-light">Dark</span>
+    <button type="button" onClick={toggle} className={`inline-flex min-h-[44px] min-w-[44px] items-center justify-center ${className ?? ''}`} aria-label="Switch between dark and light theme">
+      <Sun aria-hidden className="show-when-dark h-4 w-4" />
+      <Moon aria-hidden className="show-when-light h-4 w-4" />
     </button>
   );
 }

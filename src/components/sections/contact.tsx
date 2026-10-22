@@ -1,5 +1,4 @@
 import {profile} from '@/content';
-import {assetPath} from '@/lib/asset-path';
 import {Eyebrow} from '@/components/primitives/eyebrow';
 import {PillButton} from '@/components/primitives/pill-button';
 import {FooterInfo} from '@/components/site/footer-info';
@@ -17,10 +16,6 @@ export function Contact() {
       <div className="mt-12 flex flex-wrap gap-4">
         <PillButton href={`mailto:${profile.email}`}>Email Me</PillButton>
         {profile.bookingUrl && <PillButton href={profile.bookingUrl} variant="outline">Book a Call</PillButton>}
-        {/* Plain anchor: assetPath already applies the base path, next/link would add it twice. */}
-        <a href={assetPath(profile.cv)} download className="btn btn-outline">
-          Download CV
-        </a>
       </div>
 
       <div className="rule mt-24 pt-8">

@@ -11,6 +11,11 @@ describe('services', () => {
       expect(s.description).toBeTruthy();
     }
   });
+  it('each has a pipeline of at least three stages', () => {
+    for (const s of services) {
+      expect(s.flow.length).toBeGreaterThanOrEqual(3);
+    }
+  });
 });
 
 describe('values', () => {
